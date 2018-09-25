@@ -1,0 +1,26 @@
+# Note, this was last tested in December, 2017 though I'm only just now uploading it.
+# This would set up a lightweight container with exposed ports to get the GDAX API up and running in a Jupyter NB in seconds flat!
+
+FROM ubuntu:14.04
+
+MAINTAINER Wise.io, Inc. <help@wise.io> 
+
+ENV DEBIAN_FRONTEND noninteractive 
+
+# Install packages 
+RUN apt-get -y update && apt-get install -y wget nano locales curl unzip wget openssl libhdf5-dev python2.7 python-pip python-dev
+
+#RUN conda install scipy numpy scikit-learn scikit-image pyzmq nose readline pandas matplotlib seaborn dateutil ipython-notebook nltk
+#RUN conda install psycopg2
+#RUN conda install cython hdf5 pytables
+
+# Get GDAX
+#RUN pip install gdax scipy numpy scikit-learn pandas cython
+RUN pip install --upgrade setuptools
+RUN pip install --upgrade pip
+RUN pip install gdax
+RUN pip install ipython==5.0
+RUN pip install jupyter
+
+EXPOSE 8888
+EXPOSE 8889
